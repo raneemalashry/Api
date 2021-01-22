@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                  Raneem  yyyyyyyyyyyy
+                  Raneem  yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
                 </div>
 
                 <div class="links">
