@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                  Raneem 
+                  R
                 </div>
 
                 <div class="links">
