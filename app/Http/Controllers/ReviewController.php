@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReviewRequest;
+use App\Http\Resources\ReviewResource;
+use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
@@ -12,9 +15,9 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+     function index(Product $product)
     {
-        return Review::all();
+        return Review::where('product_id',$product->id)->get();
     }
 
     /**
@@ -33,10 +36,21 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReviewRequest $request, Product $product)
     {
-        //
+        $review=new Review();
+        $review->customer_name = $request->customer_name;
+        $review->review = $request->review;
+        $review->star = $request->star;
+        $review->product_id = $product->id;
+        $review->save();
+
+        return response([
+            'data'=>new ReviewResource($review)
+        ],201);
+        
     }
+    
 
     /**
      * Display the specified resource.
@@ -78,8 +92,9 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy(Product $product, Review $review)
     {
-        //
+        $review->delete();
+        return response(null,204);
     }
 }
